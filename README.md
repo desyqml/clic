@@ -1,6 +1,6 @@
 # Download and Downsample `CLIC` dataset
 * **Downloading the full dataset** (13.24 GB)
-    To download the full dataset to a folder simply run:
+    To download the full dataset to a folder simply run (in `clic/src/clic/`):
     ```bash
     python downloader.py --path YOURPATH
     ```
@@ -14,7 +14,7 @@
     ```
     
 * **Downsample the dataset** (1D only, for now)
-    To downsample the dataset (that you have already downloaded through `downloader.py`) simply run
+    To downsample the dataset (that you have already downloaded through `downloader.py`) simply run (in `clic/src/clic/`)
     
     ```bash
     python preprocess.py -s SOURCE -t DESTINATION -p NUMBER OF PIXELS
