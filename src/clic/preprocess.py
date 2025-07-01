@@ -7,6 +7,8 @@ import h5py
 import numpy as np
 import tqdm
 
+from clic.paths import get_data_dir
+
 
 def split_batch(batch, cutoff):
     """
@@ -109,7 +111,7 @@ class Preprocessor:
 
     @staticmethod
     def make(
-        data_path: str,
+        path: str,
         num_qubits: int = 8,
     ):
         def process_filecontents(batch, num_qubits):
@@ -132,10 +134,10 @@ class Preprocessor:
             content_px = process_filecontents(file_content, num_qubits)
             return content_px
 
-        path = Path(data_path)
-        print(f"Using path: {str(path)}")
+        _path = get_data_dir() if path is None else Path(path)
+        print(f"Using path: {str(_path)}")
 
-        files = list(path.glob("**/EleEscan_*.h5"))
+        files = list(_path.glob("**/EleEscan_*.h5"))
 
         filecontents = [
             process_file(arg)
@@ -147,7 +149,7 @@ class Preprocessor:
         joined = join_batches(filecontents)
         os.makedirs(path, exist_ok=True)
 
-        with h5py.File(path / f"clic_{num_qubits}px.h5", "w") as f:
+        with h5py.File(_path / f"clic_{num_qubits}px.h5", "w") as f:
             f.create_dataset("x", data=np.array(joined["x"]))
             f.create_dataset("y", data=np.array(joined["y"]))
 
@@ -171,15 +173,15 @@ class Preprocessor:
             np.array(joined["y"])[test_indices],
         )
 
-        with h5py.File(path / f"clic_{num_qubits}px_train.h5", "w") as f:
+        with h5py.File(_path / f"clic_{num_qubits}px_train.h5", "w") as f:
             f.create_dataset("x", data=x_train)
             f.create_dataset("y", data=y_train)
 
-        with h5py.File(path / f"clic_{num_qubits}px_val.h5", "w") as f:
+        with h5py.File(_path / f"clic_{num_qubits}px_val.h5", "w") as f:
             f.create_dataset("x", data=x_val)
             f.create_dataset("y", data=y_val)
 
-        with h5py.File(path / f"clic_{num_qubits}px_test.h5", "w") as f:
+        with h5py.File(_path / f"clic_{num_qubits}px_test.h5", "w") as f:
             f.create_dataset("x", data=x_test)
             f.create_dataset("y", data=y_test)
 
@@ -189,10 +191,9 @@ if __name__ == "__main__":
         description="Convert clic data from file to destination path"
     )
     parser.add_argument(
-        "-s", "--source", type=str, default="", help="path to clic file"
+        "-s", "--source", type=str, default=None, help="path to clic file"
     )
-    parser.add_argument("-t", "--to", type=str, help="path to destination folder")
     parser.add_argument("-p", "--pixels", type=int, default=8, help="number of pixels")
 
     args = parser.parse_args()
-    Preprocessor.make(data_path=args.source, num_qubits=args.pixels)
+    Preprocessor.make(path=args.source, num_qubits=args.pixels)

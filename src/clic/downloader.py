@@ -3,8 +3,11 @@ import os
 import sys
 import tarfile
 from pathlib import Path
+from typing import Union
 
 import wget
+
+from clic.paths import get_data_dir
 
 
 class Downloader:
@@ -13,7 +16,7 @@ class Downloader:
     FOLDER_NAME = "Ele_FixedAngle"
 
     @staticmethod
-    def download(path: str = "./", overwrite: bool = False) -> Path:
+    def download(path: Path, overwrite: bool = False) -> Path:
         """
         Downloads the dataset archive if not already present.
 
@@ -78,7 +81,7 @@ class Downloader:
         return dest_folder
 
     @staticmethod
-    def get(path: str = "./", overwrite: bool = False) -> Path:
+    def get(path: Union[str, None], overwrite: bool = False) -> Path:
         """
         Downloads and extracts the dataset if needed.
 
@@ -94,7 +97,8 @@ class Downloader:
         Path
             Path to the extracted dataset folder.
         """
-        archive_path = Downloader.download(path, overwrite)
+        _path = get_data_dir() if path is None else Path(path)
+        archive_path = Downloader.download(_path, overwrite)
         extracted_path = Downloader.extract(archive_path, overwrite)
         return extracted_path
 
@@ -112,7 +116,10 @@ class Downloader:
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument(
-        "--path", default="./", help="target directory for download and extraction"
+        "--path",
+        type=str,
+        default=None,
+        help="target directory for download and extraction",
     )
     parser.add_argument(
         "--overwrite",

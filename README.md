@@ -7,6 +7,7 @@
     
     This will download the full `.tar.gz` file to the folder and it will extract it. The file is large and it will take a while. Run the script, relax, take a coffee, brush your teeth and come back later.
 
+    (If path is not provided it will be saved in `.cache`)
     
     For further help run
     ```bash
