@@ -1,4 +1,6 @@
 # Download and Downsample `CLIC` dataset
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.16027525.svg)](https://doi.org/10.5281/zenodo.16027525)
+
 * **Downloading the full dataset** (13.24 GB)
     To download the full dataset to a folder simply run (in `clic/src/clic/`):
     ```bash
