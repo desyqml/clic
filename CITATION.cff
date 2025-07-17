@@ -1,0 +1,13 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite it as below."
+authors:
+- family-names: "Monaco"
+  given-names: "Saverio"
+  orcid: "https://orcid.org/0000-0001-8784-5011"
+- family-names: "Slim"
+  given-names: "Jamal"
+title: "clic"
+version: 1.0.0
+doi: 10.5281/zenodo.1234
+date-released: 2025-07-17
+url: "https://github.com/desyqml/clic"
