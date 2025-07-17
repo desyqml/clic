@@ -147,7 +147,7 @@ class Preprocessor:
         ]
 
         joined = join_batches(filecontents)
-        os.makedirs(path, exist_ok=True)
+        os.makedirs(_path, exist_ok=True)
 
         with h5py.File(_path / f"clic_{num_qubits}px.h5", "w") as f:
             f.create_dataset("x", data=np.array(joined["x"]))
