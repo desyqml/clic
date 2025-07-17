@@ -39,3 +39,28 @@
 # Todo:
 - [ ] Make 2D downsampling
 - [ ] Parallel Preprocessing
+
+# Citation
+If you use this software in your research or publications, **please cite** the following: 
+
+```
+@software{monaco_2025_16027525,
+  author       = {Monaco, Saverio and
+                  Slim, Jamal and
+                  Borras, Kerstin and
+                  Krücker, Dirk},
+  title        = {desyqml/clic: Initial public release},
+  month        = jul,
+  year         = 2025,
+  publisher    = {Zenodo},
+  version      = {v1.0.0},
+  doi          = {10.5281/zenodo.16027525},
+  url          = {https://doi.org/10.5281/zenodo.16027525},
+  swhid        = {swh:1:dir:fc3c8301f34f9eb5cc6d297dc3e51eb554bab5d6
+                   ;origin=https://doi.org/10.5281/zenodo.16027205;vi
+                   sit=swh:1:snp:422a799224336196205560b51072e0b9a646
+                   0690;anchor=swh:1:rel:451fd5ed75243038cc8379223d23
+                   1e34c0146c36;path=desyqml-clic-2ccf26b
+                  },
+}
+```
